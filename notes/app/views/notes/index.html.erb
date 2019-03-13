@@ -1,23 +1,25 @@
-<h1>Listing notes</h1>
+<h1 align="center" >Listing notes</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
-  </tr>
+<div id="note-container">
+  <% @note.each do |note| %>
+    <div class="note-content">
+      <h3 align="center">
+        <%= note.title %>
+      </h3>
+      <p>
+        <%= note.text %>
+      </p>
+        <%= link_to 'Show', note_path(note) %>
+        <%= link_to 'Edit', edit_note_path(note) %>
+        <%= link_to 'Destroy', note_path(note),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
 
-  <% @notes.each do |note| %>
-    <tr>
-      <td><%= note.title %></td>
-      <td><%= note.text %></td>
-      <td><%= link_to 'Show', note_path(note) %> | </td>
-      <td><%= link_to 'Edit', edit_note_path(note) %> | </td>
-      <td><%= link_to 'Destroy', note_path(note),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    </div>
   <% end %>
-</table>
-
-<%= link_to 'Add note', new_note_path %>
+</div>
+<div id="control-container">
+<div class="btn-content">
+ <%= button_to 'Add note', new_note_path, method: :get %>
+</div>
+</div>
