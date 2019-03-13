@@ -24,6 +24,16 @@
     <%= form.text_area :text %>
   </p>
 
+  <div class="field">
+	<%= form.label :image %>
+	<%= form.file_field :image %>
+	<% if form.object.image? %>
+		<%= image_tag form.object.image.thumb.url %>
+		<%= form.label :remove_image %>
+		<%= form.check_box :remove_image %>
+	<% end %>
+  </div>
+
   <p>
     <%= form.submit %>
   </p>

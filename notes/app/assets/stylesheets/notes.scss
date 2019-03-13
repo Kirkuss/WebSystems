@@ -3,26 +3,35 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 div.note-content {
-  float: left;
+	background: white;
+	float: left;
 	max-width: 200px;
-	max-height: 200px;
+	max-height: 400px;
 	word-wrap: break-word;
 	margin: 1% 1% 1% 1%;
 	border-style: double;
+	position: relative;	
+}
 
+div.image-content {
+	width: 50%;
+	margin: 0 auto;
 }
 
 div.btn-content {
-	background-color: lightblue;
-  float: right;
+	float: right;
 }
+
 #control-container {
+	background: #775700;
 	overflow: auto;
-  margin: 2% 2% 2% 2%;
+	margin: 2% 2% 2% 2%;
 }
 
 #note-container {
-  overflow: auto;
-	border-style: dotted;
+	background: #e8c871;
+	overflow: auto;
+	padding: lem;
+	border-style: ridge;
 	margin: 2% 2% 2% 2%;
 }
