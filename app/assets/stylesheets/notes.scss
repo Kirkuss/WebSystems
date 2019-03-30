@@ -1,0 +1,37 @@
+// Place all the styles related to the Notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.note-content {
+	background: white;
+	float: left;
+	max-width: 200px;
+	max-height: 400px;
+	word-wrap: break-word;
+	margin: 1% 1% 1% 1%;
+	border-style: double;
+	position: relative;	
+}
+
+div.image-content {
+	width: 50%;
+	margin: 0 auto;
+}
+
+div.btn-content {
+	float: right;
+}
+
+#control-container {
+	background: #775700;
+	overflow: auto;
+	margin: 2% 2% 2% 2%;
+}
+
+#note-container {
+	background: #e8c871;
+	overflow: auto;
+	padding: lem;
+	border-style: ridge;
+	margin: 2% 2% 2% 2%;
+}
