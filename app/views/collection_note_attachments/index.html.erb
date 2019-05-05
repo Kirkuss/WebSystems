@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Collection Note Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Collection note</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @collection_note_attachments.each do |collection_note_attachment| %>
+      <tr>
+        <td><%= collection_note_attachment.collection_note_id %></td>
+        <td><%= collection_note_attachment.avatar %></td>
+        <td><%= link_to 'Show', collection_note_attachment %></td>
+        <td><%= link_to 'Edit', edit_collection_note_attachment_path(collection_note_attachment) %></td>
+        <td><%= link_to 'Destroy', collection_note_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Collection Note Attachment', new_collection_note_attachment_path %>

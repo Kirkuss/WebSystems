@@ -1,0 +1,64 @@
+<% if session[:user] %>
+
+<div id="main-tables">
+<div id="note-table">
+<h2 style="background: #3a3b4c; color: white;" >  Notes  </h2>
+
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr align="center">
+      <th>User</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @currentuser = User.find_by name: session[:user] %>
+    <% @notes.each do |note| %>
+      <tr align="center">
+        <td class="user-text" align="center"><%= link_to note.user.name , "/users/#{note.user.id}/?profile=True", class: "badge badge-pill badge-dark" %></td>
+        <td class="note-text" width="60%"><%= note.text %></td>
+        <td><%= link_to 'Show', note, class: "badge badge-primary" %>
+        <% if @currentuser == note.user or session[:user] == "admin" %>
+        <%= link_to 'Edit', edit_note_path(note), class: "badge badge-pill badge-warning"%>
+        <%= link_to 'Destroy', note, class: "badge badge-pill badge-danger" ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<div id="coll-table">
+<h2 style="background: #3a3b4c; color: white;" >  Collections </h2>
+
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr align="center">
+      <th>User</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Collection.all.each do |note| %>
+      <tr align="center">
+        <td class="user-text" align="center"><%= link_to note.user.name , "/users/#{note.user.id}/?profile=True", class: "badge badge-pill badge-dark" %></td>
+        <td class="note-text" width="60%"><%= note.title %></td>
+        <td><%= link_to 'Show', note, class: "badge badge-primary" %>
+        <% if @currentuser == note.user  or session[:user] == "admin"  %>
+        <%= link_to 'Edit', edit_collection_path(note), class: "badge badge-pill badge-warning" %>
+        <%= link_to 'Destroy', note, class: "badge badge-pill badge-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<% else %>
+<h3 style="background: #3a3b4c; color: white;" >  WELCOME! <br>
+<a href="/signup"> Sign up</a> or <a href="/login"> Log in</a> to start using the Notebook! </h3>
+<% end %>

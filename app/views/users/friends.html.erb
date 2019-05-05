@@ -1,0 +1,32 @@
+<h2 style="background: #3a3b4c; color: white;" >  Friend List </h2>
+<% @currentuser = User.find_by name: session[:user] %>
+<% if @currentuser.friends.count != 0 %>
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr>
+      <th></th>  
+      <th>Name</th>
+      <th>Note count:</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @currentuser = User.find_by name: session[:user] %>
+      <tr>       
+        <% @currentuser.friends.each do |friend| %>
+        <td><%= link_to "Remove Friend", friend, class: "badge badge-pill badge-danger" %></td>        
+        <td ><%= link_to friend.name , "/users/#{friend.id}/?profile=True", class: "badge badge-pill badge-dark" %></td>
+        <td><%= friend.notes.count %></td>
+        <% end %>
+        
+      </tr>       
+    
+    
+  </tbody>
+</table>
+<% else %>
+<h2 style="background: #3a3b4c; color: white;" > You don't have any friends :( </h2>
+<% end %>
+<br>
+<%= link_to "Back", notes_path %>

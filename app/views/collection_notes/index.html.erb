@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h2 style="background: #3a3b4c; color: white;" >  Collection Notes </h2>
+
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr align="center">
+      <th>User</th>
+      <th>Text</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @collection_notes.each do |collection_note| %>
+      <tr align="center">
+        <td><%= collection_note.user.name %></td>
+        <td><%= collection_note.text %></td>        
+        <td><%= link_to 'Show', collection_note %></td>
+        <% @currentuser = User.find_by name: session[:user] %>
+        <% if @currentuser == collection_note.user  or session[:user] == "admin"  %>
+        <td><%= link_to 'Edit', edit_collection_note_path(collection_note) %></td>
+        <td><%= link_to 'Destroy', collection_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+<%= link_to 'New Collection Note', new_collection_note_path %>

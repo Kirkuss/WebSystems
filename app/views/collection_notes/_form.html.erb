@@ -1,0 +1,21 @@
+<div class="container" style="background: #505868; min-height: 250px">
+<%= form_for(@collection_note, :html => { :multipart => true }) do |f| %>
+   <div class="form-group">
+    <%= f.label :text %>
+    <%= f.text_area :text, id: :tweet_text, class: "form-control"%>
+  </div>
+
+   <%= f.fields_for :collection_note_attachments do |p| %>
+     <div class="field">
+       <%= p.file_field :avatar, :multiple => true, name: "collection_note_attachments[avatar][]" %>
+     </div>
+   <% end %>
+
+
+   <%= hidden_field_tag 'collection_id', @collection.id if @collection %>
+
+   <div class="actions">
+     <%= f.submit %>
+   </div>
+ </div>
+<% end %>

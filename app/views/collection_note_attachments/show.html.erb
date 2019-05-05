@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Collection note:</strong>
+  <%= @collection_note_attachment.collection_note_id %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @collection_note_attachment.avatar %>
+</p>
+
+<% @currentuser = User.find_by name: session[:user] %>
+<% if  @currentuser == @collection_note_attachment.collection_note.user %>
+<%= link_to 'Edit', edit_collection_note_attachment_path(@collection_note_attachment) %> |
+<%= link_to 'Back', collection_note_attachments_path %>

@@ -1,0 +1,32 @@
+<h2 style="background: #3a3b4c; color: white;" >  Friend Requests </h2>
+<% @currentuser = User.find_by name: session[:user] %>
+<% if @currentuser.requested_friends.count != 0 %>
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr>     
+      <th>Name</th>
+      <th>Note count:</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @currentuser = User.find_by name: session[:user] %>
+      <tr>
+        <% @currentuser.requested_friends.each do |friend| %>
+        <td ><%=link_to friend.name, friend,  class: "badge badge-pill badge-dark" %></td>
+        <td ><%= friend.notes.count %></td>
+        <td><%= link_to 'Accept', "/users/#{friend.id}/?accept=True", class: "badge badge-success" %></td>
+         <td><%= link_to 'Decline', "/users/#{friend.id}/?decline=True", class: "badge badge-pill badge-danger" %></td>
+        <% end %>
+        
+      </tr>       
+    
+    
+  </tbody>
+</table>
+<% else %>
+<h2 style="background: #3a3b4c; color: white;" > You don't have any requests :( </h2>
+<% end%>
+<br>
+<%= link_to "Back", notes_path %>

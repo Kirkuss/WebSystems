@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h2 style="background: #3a3b4c; color: white;" > Users </h2>
+
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr>
+      <th></th>      
+      <th>Name</th>
+      <th>Note count:</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <% @currentuser = User.find_by name: session[:user] %>
+        <% if !@currentuser.friends_with?(user)%>
+        <% if @currentuser != user and !@currentuser.friends_with?(user) %>        
+        <td><%= link_to "Add Friend", user, class: "badge badge-success" %></td>        
+        <% else %>
+        <td></td>
+        <% end %>
+        <% else %>
+        <td><%= link_to "Remove Friend", user, class: "badge badge-pill badge-danger" %></td>  
+        <% end %>
+        <td ><%= link_to user.name , "/users/#{user.id}/?profile=True", class: "badge badge-pill badge-dark"%></td>     
+        <td><%= user.notes.count + user.collection_notes.count %></td>
+        <% if @currentuser == user or session[:user] == "admin"  %>
+        <td><%= link_to 'Edit profile', edit_user_path(user), class: "badge badge-pill badge-warning" %>
+        <%= link_to 'Destroy Account', user,class: "badge badge-pill badge-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %> |
+<%= link_to 'Back', notes_path %>
+
+

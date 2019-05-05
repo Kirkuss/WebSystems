@@ -1,0 +1,9 @@
+<div class="container" style="background: #505868; min-height: 250px">
+<%= form_with(model: collection, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :collection_title, class: "form-control" %>
+  </div>
+<%= form.submit %>
+<% end %>
+</div>

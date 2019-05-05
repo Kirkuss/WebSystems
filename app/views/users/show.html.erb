@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<% @currentuser = User.find_by name: session[:user] %>
+
+<% if @currentuser.friends_with?(@user) or @currentuser == @user %>
+ 		
+<h2 style="background: #3a3b4c; color: white;" > User Notes  </h2>
+
+ <table class="table table-light">
+  <thead class="thead-dark">
+    <tr>
+      <th>User</th>
+      <th>Text</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.notes.each do |note| %>
+      <tr>        
+        <td><%= link_to note.user.name , "/users/#{note.user.id}/?profile=True", class: "badge badge-pill badge-dark" %></td>       
+        <td><%= note.text %></td>    
+        <td><%= link_to 'Show', note , class: "badge badge-primary"%>
+        <% if @currentuser == note.user or session[:user] == "admin" %>
+        <%= link_to 'Edit', edit_note_path(note), class: "badge badge-pill badge-warning" %>
+        <%= link_to 'Destroy', note, class: "badge badge-pill badge-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2 style="background: #3a3b4c; color: white;" > User Collections  </h2>
+
+ <table class="table table-light">
+  <thead class="thead-dark">
+    <tr>
+      <th>User</th>
+      <th>Title</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.collections.each do |note| %>
+      <tr>        
+        <td><%= link_to note.user.name , "/users/#{note.user.id}/?profile=True", class: "badge badge-pill badge-dark" %></td>       
+        <td><%= note.title %></td>    
+        <td><%= link_to 'Show', note,  class: "badge badge-primary"%>
+        <% if @currentuser == note.user or session[:user] == "admin" %>
+        <%= link_to 'Edit', edit_note_path(note), class: "badge badge-pill badge-warning" %>
+        <%= link_to 'Destroy', note, class: "badge badge-pill badge-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% else %>
+
+
+<% flash[:notice] = "In order to see user's notes you must be friends! "%>
+<% end %>
+
+
+
+
+<%= link_to 'Back', notes_path %>

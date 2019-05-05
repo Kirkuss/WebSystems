@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<h2 style="background: #3a3b4c; color: white;" >  Collection Notes </h2>
+
+<table class="table table-light">
+  <thead class="thead-dark">
+    <tr align="center">
+      <th>User</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @collection_notes.each do |collection_note| %>
+      <tr align="center">
+        <td class="user-text"><%= link_to @collection.user.name, @collection.user, class: "badge badge-pill badge-dark" %></td>
+        <td class="note-text"> <%= collection_note.text %></td>
+        <td><%= link_to 'Show', collection_note, class: "badge badge-primary" %>
+         <% @currentuser = User.find_by name: session[:user] %>
+        <% if @currentuser == collection_note.user  or session[:user] == "admin"  %>
+        <%= link_to 'Edit', edit_collection_note_path(collection_note), class: "badge badge-pill badge-warning" %>
+        <%= link_to 'Destroy', collection_note,  class: "badge badge-pill badge-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+
+
+<% @currentuser = User.find_by name: session[:user] %>
+<% if @currentuser == @collection.user %>
+<%= link_to "New Note", new_collection_note_path(:collection_id => @collection.id) %> |
+<%= link_to 'Edit', edit_collection_path(@collection) %> |
+<% end %>
+<%= link_to 'Back', notes_path %>
